@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Sleepy Owl</title> 
+	
+	
+	<style>
+		canvas {
+			border: #333 10px solid;
+		}
+		img {
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			z-index: -1;
+		}
+	</style>
+	
+</head>
+
+<body>
+	<img src="images/owl.jpg" width="550" height="550">
+	<canvas id="myCanvas" width="525px" height="525px"></canvas>
+	
+	<script>
+		var canvas = document.querySelector("#myCanvas");
+		var context= canvas.getContext("2d");
+		
+		
+		var eyeImage = new Image();
+		eyeImage.src = "images/sprites_GooglyOwl_T.png";
+		eyeImage.addEventListener("load", loadEye, false);
+		
+		var eyeImage2 = new Image();
+		eyeImage2.src = "images/sprites_GooglyOwl_T.png";
+		eyeImage2.addEventListener("load", loadEye, false);
+		
+		
+		function loadEye(e) {
+			animate();
+		}
+		
+		var shift = 0;
+		var frameWidth = 150;
+		var frameHeight = 150;
+		var totalFrames = 24;
+		var currentFrame = 0;
+		
+		function animate() {
+			context.clearRect(100, 78, 150, 150);
+			context.clearRect(270,65,150,150);
+			
+			//draw each frame
+			context.drawImage(eyeImage, shift, 0, frameWidth, frameHeight, 100, 78, frameWidth, frameHeight);
+			context.drawImage(eyeImage2, shift, 0, frameWidth, frameHeight, 270, 65, frameWidth, frameHeight);
+			
+			shift += frameWidth + .5;
+			
+			/*
+			Start at the beginning once you've reached the end of your sprite!
+			*/
+			if (currentFrame == totalFrames) {
+				shift = 0;
+				currentFrame = 0;
+			}
+			
+		currentFrame++;
+		
+		requestAnimationFrame(animate);
+		}
+	
+	context.font="35px Helvetica, Arial, sans-serif";
+	context.fillStyle = "#993300";
+	context.fillText("Is It Night-time Yet?",130,500);
+	
+	
+	
+	
+	
+	
+	</script>
+	
+
+</body>
+</html>
